@@ -7,6 +7,8 @@
 [![Python versions (PyPI)](https://img.shields.io/pypi/pyversions/pyoptflow.svg)](https://pypi.python.org/pypi/pyoptflow)
 [![PyPi Download stats](http://pepy.tech/badge/pyoptflow)](http://pepy.tech/project/pyoptflow)
 
+Credits: Original implementation forked from [scivision](https://github.com/scivision/pyoptflow)
+
 # Optical Flow: Horn-Schunck
 
 Python implementation of optical flow estimation using only the Scipy stack for:
@@ -37,25 +39,25 @@ The program scripts expect `directory` `glob pattern`
 
 ### Box
 
-    python HornSchunck.py data/box box*.bmp
+    python HornSchunck.py
 
 ### Office
 
 all time steps:
 
-    python HornSchunck.py data/office office*.bmp
+    python HornSchunck.py --stem data/office --pat office*.bmp
 
 or just the first 2 time steps:
 
-    python HornSchunck.py data/office office.[0-2].bmp
+    python HornSchunck.py --stem data/office --pat office.[0-2].bmp
 
 ### Rubic
 
-    python HornSchunck.py data/rubic rubic*.bmp
+    python HornSchunck.py --stem data/rubic --pat rubic*.bmp
 
 ### Sphere
 
-    python HornSchunck.py data/sphere sphere*.bmp
+    python HornSchunck.py --stem data/sphere --pat sphere*.bmp
 
 ## Compare: Matlab Computer Vision toolbox
 
