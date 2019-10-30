@@ -41,13 +41,12 @@ def HornSchunck(im1: np.ndarray, im2: np.ndarray, alpha: float = 0.001, Niter: i
         from .plots import plotderiv
         plotderiv(fx, fy, ft)
 
-#    print(fx[100,100],fy[100,100],ft[100,100])
-
-        # Iteration to reduce error
+    # Iteration to reduce error
     for _ in range(Niter):
         # %% Compute local averages of the flow vectors
         uAvg = filter2(U, HSKERN)
         vAvg = filter2(V, HSKERN)
+
 # %% common part of update step
         der = (fx*uAvg + fy*vAvg + ft) / (alpha**2 + fx**2 + fy**2)
 # %% iterative step
