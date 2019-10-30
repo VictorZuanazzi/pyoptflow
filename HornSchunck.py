@@ -31,7 +31,7 @@ def main():
     show()
 
 def rgb2gray(img):
-    """from rgb to gray conversion """
+    """from rgb to gray conversion"""
     if len(img.shape) == 2:
         # image already is in gray scale
         return img
@@ -51,15 +51,13 @@ def horn_schunck(stem, pat: str):
 
         im1 = np.flip(im1, 0)
 
-#       Iold = gaussian_filter(Iold,FILTER)
-
         fn2 = flist[i+1]
         im2 = imageio.imread(fn2, as_gray=False)
         im2 = np.flip(im2, 0)
-#        Inew = gaussian_filter(Inew,FILTER)
 
         U, V = HornSchunck(rgb2gray(im1), rgb2gray(im2), 1., 100)
-        compareGraphs(U, V, im2, fn=fn2.name)
+        path = stem + "/" + fn2.name
+        compareGraphs(U, V, im2, fn=fn2.name, save=path)
 
     return U, V
 
