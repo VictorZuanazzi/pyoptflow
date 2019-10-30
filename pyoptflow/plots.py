@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import numpy as np
 import imageio
+from pyoptflow import getimgfiles
+from tqdm import tqdm as tqdm
 
 
 def plotderiv(fx, fy, ft):
@@ -15,17 +17,38 @@ def plotderiv(fx, fy, ft):
         a.set_title(t)
         fg.colorbar(h, ax=a)
 
+def gif_generator(path, filenames = []):
+    """Saves a sequence of images as a .gif
+    input:
+        path: str, folder path where the images are located. It is also where the gif is saved.
+        filenames: list[str], a list containing the file names. If not provided it will use all .png images in the
+            folder provided in path. The file names are assumed sorted.
+    output:
+        saves flow.gif in the folder provided in path.
+    """
+    images = []
+
+    if filenames == []:
+        filenames = getimgfiles(path, "*.png")
+
+    for filename in tqdm(filenames, ncols=100, desc="GIFing"):
+        images.append(imageio.imread(filename))
+
+    imageio.mimsave(path+"/flow.gif", images)
 
 def compareGraphs(u, v, Inew, scale: int = 3, quivstep: int = 5, fn: Path = None, save: str = None):
     """
     makes quiver
     input:
-    u, v: np.array(Inew.shape), x and y coordinates of the dense optical flow.
-    Inew: np.array(), image where optical flow was computed.
-    scale: int, scale of the quiver arrows.
-    quivstep: int, grid spacing for the quiver in pixels. Same spacing is used in x and y.
-    fn: str, title of the image. If None, image is not titled.
-    save: str, path to save the image. If None, image is not saved.
+        u, v: np.array(Inew.shape), x and y coordinates of the dense optical flow.
+        Inew: np.array(), image where optical flow was computed.
+        scale: int, scale of the quiver arrows.
+        quivstep: int, grid spacing for the quiver in pixels. Same spacing is used in x and y.
+        fn: str, title of the image. If None, image is not titled.
+        save: str, path to save the image. If None, image is not saved.
+    output:
+        saves flow image in disk if requested.
+        prompts the image.
     """
 
     ax = figure().gca()
@@ -36,8 +59,8 @@ def compareGraphs(u, v, Inew, scale: int = 3, quivstep: int = 5, fn: Path = None
     V = v[::quivstep, ::quivstep]
 
     # creates the original X and Y coordinates
-    X = np.zeros(U.shape) + np.arange(0, u.shape[0], quivstep)
-    Y = (np.zeros(U.T.shape) + np.arange(0, u.shape[1], quivstep)).T
+    X = np.zeros(U.shape) + np.arange(0, u.shape[1], quivstep)
+    Y = (np.zeros(U.T.shape) + np.arange(0, u.shape[0], quivstep)).T
 
     # plot frame
     ax.quiver(X, Y, U, V)
