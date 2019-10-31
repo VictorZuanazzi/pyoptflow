@@ -60,7 +60,9 @@ def rgb2gray(img):
         # Not RGB image, just ignore the other channels!
         img = img[0:3]
 
-    return np.average(img, weights=[0.299, 0.587, 0.114], axis=2)
+    weights = [0.299, 0.587, 0.114] + [0] * (img.shape[2] - 3)
+
+    return np.average(img, weights=weights, axis=2)
 
 
 def horn_schunck(stem, pat: str, save_to: str):
