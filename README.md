@@ -15,7 +15,7 @@ Python implementation of optical flow estimation using only the Scipy stack for:
 
 * Horn Schunck
 
-Lucas-Kanade is also possible in the future, let us know if you're interested in Lucas Kanade.
+The implementation of Lucas-Kanade is not currently working, colaboration on that is welcome. 
 
 ## Install
 
