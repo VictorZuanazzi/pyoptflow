@@ -46,6 +46,8 @@ The program scripts expect `directory` `glob pattern`
 all time steps:
 
     python HornSchunck.py --stem data/office --pat office*.bmp
+   
+![](https://github.com/VictorZuanazzi/pyoptflow/blob/master/data/office_out/flow.gif)
 
 or just the first 2 time steps:
 
@@ -54,10 +56,14 @@ or just the first 2 time steps:
 ### Rubic
 
     python HornSchunck.py --stem data/rubic --pat rubic*.bmp
+    
+![](https://github.com/VictorZuanazzi/pyoptflow/blob/master/data/rubic_out/flow.gif)
 
 ### Sphere
 
     python HornSchunck.py --stem data/sphere --pat sphere*.bmp
+    
+![](https://github.com/VictorZuanazzi/pyoptflow/blob/master/data/sphere_out/flow.gif)
 
 ## Compare: Matlab Computer Vision toolbox
 
